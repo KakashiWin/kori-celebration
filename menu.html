@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kori Celebration Menu</title>
+<style>
+/* Body & font */
+body {
+  margin:0; padding:0; height:100vh;
+  font-family:"Segoe UI",sans-serif;
+  background: linear-gradient(135deg,#0f1237,#3b0066);
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  color:#fff; text-align:center; overflow:hidden;
+  position: relative;
+}
+
+/* Mystical fog layers */
+.fog {
+  position:absolute;
+  width:150%; height:150%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
+  top:-25%; left:-25%;
+  filter: blur(80px);
+  animation: drift 60s linear infinite;
+  pointer-events:none;
+}
+.fog:nth-child(1){ animation-delay:0s; }
+.fog:nth-child(2){ animation-delay:20s; }
+.fog:nth-child(3){ animation-delay:40s; }
+
+@keyframes drift {
+  0%{transform: translate(0,0);}
+  50%{transform: translate(50px, -30px);}
+  100%{transform: translate(0,0);}
+}
+
+/* Title */
+h1 {
+  font-size:3rem;
+  margin-bottom:40px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.7);
+  animation: titleFade 2s forwards;
+  background: linear-gradient(90deg,#ff66b3,#66e3ff,#faff00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  z-index:10;
+}
+
+@keyframes titleFade {
+  from {opacity:0; transform: translateY(-30px);}
+  to {opacity:1; transform: translateY(0);}
+}
+
+/* Subtitle */
+.subtitle {
+  font-size:1.2rem;
+  color:#ffd1f0;
+  margin-bottom:50px;
+  opacity:0;
+  animation: subtitleFade 3s forwards;
+}
+@keyframes subtitleFade {
+  from {opacity:0; transform: translateY(20px);}
+  to {opacity:1; transform: translateY(0);}
+}
+
+/* Menu Grid */
+.menu-grid {
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+  z-index:10;
+}
+
+/* Cards */
+.card {
+  position: relative;
+  background: linear-gradient(90deg,#ff66b3,#66e3ff);
+  padding: 20px 45px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size:1.4rem;
+  color:#071026;
+  box-shadow:0 10px 30px rgba(0,0,0,0.35);
+  transition: transform 0.3s, box-shadow 0.3s;
+  opacity:0;
+  animation: fadeUp 0.7s forwards;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: scale(1.12) translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+/* Gradient shimmer on hover */
+.card::before {
+  content:"";
+  position:absolute;
+  top:0; left:-100%;
+  width:200%; height:100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.2), rgba(255,255,255,0.6), rgba(255,255,255,0.2));
+  transform: skewX(-25deg);
+  transition: left 0.5s;
+}
+.card:hover::before { left:0; }
+
+/* Staggered animations */
+.card:nth-child(1){ animation-delay:0.3s; }
+.card:nth-child(2){ animation-delay:0.5s; }
+.card:nth-child(3){ animation-delay:0.7s; }
+.card:nth-child(4){ animation-delay:0.9s; }
+
+@keyframes fadeUp {
+  from {opacity:0; transform:translateY(30px);}
+  to {opacity:1; transform:translateY(0);}
+}
+
+/* Floating effect */
+@keyframes floatY {
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-6px);}
+}
+.card { animation: floatY 4s ease-in-out infinite, fadeUp 0.7s forwards; }
+
+/* Effects container */
+.effects {
+  position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:5;
+}
+
+/* Sparkles */
+.sparkle {
+  position:absolute;
+  width:4px; height:4px;
+  background: gold;
+  border-radius:50%;
+  opacity:0;
+  animation: sparkleAnim 1.5s ease-in-out infinite;
+}
+@keyframes sparkleAnim {
+  0%{opacity:0; transform:scale(0);}
+  50%{opacity:1; transform:scale(1);}
+  100%{opacity:0; transform:scale(0);}
+}
+
+/* Magical orbs */
+.orb {
+  position:absolute;
+  width:8px; height:8px;
+  border-radius:50%;
+  background: rgba(255,255,255,0.5);
+  filter: blur(4px);
+  animation: orbFloat linear infinite;
+}
+@keyframes orbFloat {
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-40px);}
+  100%{transform:translateY(0);}
+}
+
+/* Floating stars */
+.star {
+  position:absolute;
+  width:2px; height:2px;
+  background: #fff;
+  opacity:0;
+  animation: twinkle 4s infinite;
+}
+@keyframes twinkle {
+  0%,100%{opacity:0;}
+  50%{opacity:1;}
+}
+</style>
+</head>
+<body>
+
+<!-- Fog Layers -->
+<div class="fog"></div>
+<div class="fog"></div>
+<div class="fog"></div>
+
+<h1>🎉 Kori Celebration 🎉</h1>
+<div class="subtitle">Step inside… a world of wonder, celebration, and surprises awaits.</div>
+
+<div class="menu-grid">
+  <div class="card" onclick="window.location='birthday.html'">🎂 Belated Birthday</div>
+  <div class="card" onclick="window.location='anniversary.html'">🎊 4-Year Anniversary</div>
+  <div class="card" onclick="window.location='debut.html'">🌟 3.0 Debut</div>
+  <div class="card" onclick="window.location='thankyou.html'">💖 Personal Thank You</div>
+</div>
+
+<div id="effects" class="effects"></div>
+
+<script>
+// Hover sparkles for buttons
+const effects = document.getElementById('effects');
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    for(let i=0;i<3;i++){
+      const sparkle = document.createElement('div');
+      sparkle.className='sparkle';
+      sparkle.style.left = (e.clientX + (Math.random()*20-10)) + 'px';
+      sparkle.style.top = (e.clientY + (Math.random()*20-10)) + 'px';
+      sparkle.style.animationDuration = (0.8 + Math.random()*0.7) + 's';
+      effects.appendChild(sparkle);
+      setTimeout(()=>effects.removeChild(sparkle),1500);
+    }
+  });
+});
+
+// Generate magical orbs
+for(let i=0;i<20;i++){
+  const orb = document.createElement('div');
+  orb.className='orb';
+  orb.style.left = Math.random()*100 + 'vw';
+  orb.style.top = Math.random()*100 + 'vh';
+  orb.style.width = 4 + Math.random()*8 + 'px';
+  orb.style.height = orb.style.width;
+  orb.style.animationDuration = 5 + Math.random()*5 + 's';
+  effects.appendChild(orb);
+}
+
+// Generate twinkling stars
+for(let i=0;i<50;i++){
+  const star = document.createElement('div');
+  star.className='star';
+  star.style.left = Math.random()*100 + 'vw';
+  star.style.top = Math.random()*100 + 'vh';
+  star.style.animationDelay = Math.random()*4 + 's';
+  star.style.width = 1 + Math.random()*2 + 'px';
+  star.style.height = star.style.width;
+  effects.appendChild(star);
+}
+</script>
+
+</body>
+</html>

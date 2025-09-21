@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heartfelt Thank You - Kori</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+body {
+  margin:0; padding:0; height:100vh;
+  font-family:"Segoe UI",sans-serif;
+  background: linear-gradient(135deg,#0f1237,#3b0066);
+  display:flex; justify-content:center; align-items:center;
+  overflow:hidden; color:#fff; text-align:center;
+}
+
+.content {
+  background: rgba(0,0,0,0.35);
+  padding:50px; border-radius:25px; max-width:700px;
+  line-height:1.6; font-size:1.2rem;
+  opacity:0; transform: translateY(30px);
+  animation: contentFade 1s ease forwards;
+  position: relative;
+}
+
+@keyframes contentFade {
+  to { opacity:1; transform: translateY(0); }
+}
+
+/* Back button inside content */
+.btn-back {
+  display:inline-block; margin-top:30px;
+  padding:12px 25px; font-size:1rem; font-weight:bold;
+  border:none; border-radius:20px;
+  background: linear-gradient(90deg,#ff66b3,#66e3ff);
+  color:#071026; cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,0.35);
+  transition: transform 0.15s, box-shadow 0.15s, background 0.3s;
+}
+.btn-back:hover {
+  transform:translateY(-3px);
+  box-shadow:0 12px 24px rgba(0,0,0,0.45);
+  background: linear-gradient(90deg,#ff85c1,#66f0ff);
+}
+
+.effects { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+
+.heart {
+  width:16px; height:16px; background:#ff4d88;
+  position:absolute; transform:rotate(45deg) scale(0);
+  border-radius:0; animation: heartFloat 3s ease forwards;
+}
+.heart::before, .heart::after { content:""; position:absolute; width:16px; height:16px; background:#ff4d88; border-radius:50%; }
+.heart::before { top:-8px; left:0; }
+.heart::after { left:8px; top:0; }
+
+@keyframes heartFloat {
+  0% { opacity:0; transform:translateY(0) rotate(45deg) scale(0);}
+  50% { opacity:1; transform:translateY(-50px) rotate(45deg) scale(1);}
+  100% { opacity:0; transform:translateY(-120px) rotate(45deg) scale(0);}
+}
+</style>
+</head>
+<body>
+
+<div class="content" id="thankContent"></div>
+<div id="effects" class="effects"></div>
+
+<script>
+// Lines of text
+const lines = [
+"Kori, your streams brighten my day with energy and creativity.",
+"Every conversation, every moment in your community, leaves a lasting smile.",
+"The care and thought you pour into your work are truly inspiring.",
+"Watching, playing, chatting, and laughing together creates unforgettable memories.",
+"Your creativity, charm, and positive vibes make every stream a special experience.",
+"The community you’ve built is warm, kind, and encouraging — and it’s a joy to be part of it.",
+"I’m grateful for the experiences, the laughs, and the support you share with everyone.",
+"Here’s to many more streams, epic adventures, exciting surprises, and celebrations ahead!"
+];
+
+const contentDiv = document.getElementById('thankContent');
+lines.forEach((line,i)=>{
+  const span=document.createElement('span');
+  span.textContent=line;
+  span.style.display='block';
+  span.style.margin='12px 0';
+  span.style.opacity=0;
+  span.style.transform='translateY(10px)';
+  contentDiv.appendChild(span);
+  setTimeout(()=>{
+    span.style.transition='opacity 1s ease, transform 1s ease';
+    span.style.opacity=1;
+    span.style.transform='translateY(0)';
+  }, i*800);
+});
+
+// Add back button at bottom of content
+const backBtn = document.createElement('button');
+backBtn.textContent = "⬅ Back";
+backBtn.className = "btn-back";
+backBtn.onclick = ()=>{ window.location='menu.html'; };
+contentDiv.appendChild(backBtn);
+
+// Hearts effect
+const effects=document.getElementById('effects');
+for(let i=0;i<40;i++){
+  const el=document.createElement('div');
+  el.className='heart';
+  el.style.left=Math.random()*100+'vw';
+  el.style.top=Math.random()*100+'vh';
+  el.style.animationDuration=(2 + Math.random()*2)+'s';
+  el.style.animationDelay=(Math.random()*3)+'s';
+  effects.appendChild(el);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3.0 Debut - Kori</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+body {
+  margin:0; padding:0; min-height:100vh;
+  font-family:"Segoe UI",sans-serif;
+  background: linear-gradient(135deg,#0f1237,#3b0066);
+  display:flex; justify-content:center; align-items:center;
+  overflow:hidden; color:#fff; text-align:center;
+}
+
+.content {
+  background: rgba(0,0,0,0.25);
+  padding:40px; border-radius:20px; max-width:700px;
+  line-height:1.6; font-size:1.2rem;
+  position: relative; z-index:10;
+}
+
+.reveal-line {
+  opacity:0;
+  display:block;
+  margin:12px 0;
+  font-weight:500;
+}
+
+.btn-back {
+  margin-top: 25px;
+  padding: 12px 25px; font-size: 1rem; font-weight: bold;
+  border: none; border-radius: 12px;
+  background: linear-gradient(90deg,#ff66b3,#66e3ff);
+  color: #071026; cursor: pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,0.35);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn-back:hover { transform:translateY(-3px); box-shadow:0 12px 24px rgba(0,0,0,0.45); }
+
+.effects {
+  position:absolute; inset:0; pointer-events:none; overflow:hidden;
+}
+
+.sparkle {
+  position:absolute; width:6px; height:6px; border-radius:50%; background:gold;
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,0.5));
+  opacity:0; transform:scale(0);
+  animation: sparklePop 1.6s ease forwards;
+}
+@keyframes sparklePop {0%{opacity:1;transform:scale(0.1);}50%{opacity:0.9;transform:scale(1.3);}100%{opacity:0;transform:scale(0.2);}}
+
+.starburst {
+  position:absolute;
+  left:50%; top:50%;
+  width:220px;height:220px;border-radius:50%;
+  transform:translate(-50%,-50%) scale(0.1);
+  background: radial-gradient(circle, rgba(255,241,128,0.9), rgba(255,241,128,0.15));
+  filter: blur(2px); opacity:0;
+  animation: burstAnim 1.2s ease-out forwards;
+}
+@keyframes burstAnim{0%{transform:translate(-50%,-50%) scale(0.1);opacity:1;}70%{transform:translate(-50%,-50%) scale(1.2);opacity:0.8;}100%{transform:translate(-50%,-50%) scale(2);opacity:0;}}
+</style>
+</head>
+<body>
+
+<div class="content" id="debutContent">
+  <button class="btn-back" onclick="window.location='menu.html'">⬅ Back</button>
+</div>
+
+<div id="effects" class="effects"></div>
+
+<script>
+const lines = [
+  "🌟 The 3.0 Debut Stream last night was absolutely amazing! 🌟",
+  "The energy in the stream was insane — everyone was hyped and loving it!",
+  "The new design is perfect, cute, and just fits everything so well!",
+  "The new emotes are adorable and so fun — I can already tell they’ll be my favorites!",
+  "The new features are awesome, making the stream feel next-level and super interactive!",
+  "The music, the announcements, everything — it all came together perfectly!",
+  "The community showed up in full force, and the vibe was just electric!",
+  "Honestly, everything about the debut was flawless, exciting, and unforgettable!",
+  "I can’t wait for the next streams and all the cool things ahead!"
+];
+
+const contentDiv = document.getElementById('debutContent');
+
+// Add lines above the back button
+const backButton = contentDiv.querySelector('.btn-back');
+
+lines.forEach((line,i)=>{
+  const span = document.createElement('span');
+  span.className = "reveal-line";
+  span.textContent = line;
+  contentDiv.insertBefore(span, backButton); // insert above the button
+  setTimeout(()=>{span.style.transition="opacity 1s ease"; span.style.opacity=1;}, i*900);
+});
+
+// Sparkles
+const effects=document.getElementById('effects');
+for(let i=0;i<25;i++){
+  const el=document.createElement('div');
+  el.className='sparkle';
+  el.style.left=Math.random()*100+'vw';
+  el.style.top=Math.random()*100+'vh';
+  el.style.animationDelay=(Math.random()*2)+'s';
+  effects.appendChild(el);
+}
+
+// Starburst
+const star=document.createElement('div');
+star.className='starburst';
+effects.appendChild(star);
+</script>
+
+</body>
+</html>
